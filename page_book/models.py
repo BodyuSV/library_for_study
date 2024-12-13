@@ -6,5 +6,5 @@ class Article(models.Model):
     content = models.TextField(max_length=10000)
     photo = models.ImageField(upload_to='image/%Y/%m/%d/')
     file = models.FileField(blank=True, upload_to='file/%Y/%m/%d/')
-    time_create = models.DateTimeField(auto_created=True)
+    time_create = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=False)
