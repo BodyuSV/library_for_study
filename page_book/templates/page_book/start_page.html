@@ -5,8 +5,33 @@
     <title>{{ title }}</title>
 </head>
 <body>
-{% for m in menu %}
-    <p>{{ m }}<p/>
+<p><a href="{% url 'home' %}">Главная страница</a></p>
+<p><a href="{% url 'add_page' %}">Добаввить статью</a></p>
+
+{% if cat_sected == 0 %}
+ <li>Все категории</li>
+{% else %}
+<p><a href="{% url 'home' %}">Все категории</a> </p>
+{% endif %}
+
+{% for c in cats %}
+<!--    {% if c.pk == cat_selected %}-->
+<!--        <li>{{ c.name }}</li>-->
+<!--    {% else %}-->
+    <p><a href="{% url 'cat' c.pk %}">{{ c.name }}</a></p>
+<!--    {% endif %}-->
+{% endfor %}
+
+
+{% for p in post %}
+    <img src = {{ p.photo.url }}
+         width="200"
+         height="270"/>
+    <p>{{ p.title }}<p/>
+    <p>{{ p.content|truncatewords:50 }}</p>
+    <p>Категория: {{p.cat}}</p>
+    <p><a href="{{ p.get_absolute_url }}">Читать статью</a></p>
+
 {% endfor %}
 </body>
 </html>
